@@ -4,7 +4,7 @@ GDS files for the [ASHES](https://github.com/GTIceLab/ashes) cell library. One
 cell here, the winner-take-all cell, is on the test chip. The final charge pump
 layouts are in [`FinalPumps/`](FinalPumps/README.md).
 
-For an overview of the chip see the [top-level README](../../../README.md).
+For an overview of the chip see the [top-level&nbsp;README](../../../README.md).
 
 | Structure | Files | On the chip |
 |---|---|---|

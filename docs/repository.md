@@ -41,7 +41,7 @@ repository does not record which one was submitted.
    ```
 
 The test structures are small compared with the die. The index in the
-[top-level README](../README.md#index) gives the origin of each one.
+[top-level&nbsp;README](../README.md#index) gives the origin of each one.
 
 ## Cells that are not on this chip
 

@@ -5,7 +5,7 @@ with floating-gate programming. An OTA turns a differential input voltage into
 an output current. Floating gates let the bias and offset of each amplifier be
 programmed after fabrication and kept without power.
 
-For an overview of the chip see the [top-level README](../../../README.md).
+For an overview of the chip see the [top-level&nbsp;README](../../../README.md).
 
 ## Transconductance amplifiers
 

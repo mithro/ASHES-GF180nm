@@ -5,7 +5,7 @@ are never high at the same time. Each charge pump on the chip has its own copy,
 which drives the pump capacitors.
 
 Pads, measurement steps and expected results for the pumps are in the
-[FinalPumps README](../../../2_Tools/lib/gds/FinalPumps/README.md).
+[FinalPumps&nbsp;README](../../../2_Tools/lib/gds/FinalPumps/README.md).
 
 ## Clock generator
 

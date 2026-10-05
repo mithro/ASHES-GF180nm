@@ -6,7 +6,7 @@ voltage above the supply from a two-phase clock. Floating-gate circuits need
 such voltages for programming: hot-electron injection and Fowler-Nordheim
 tunneling.
 
-For an overview of the chip see the [top-level README](../../../../README.md).
+For an overview of the chip see the [top-level&nbsp;README](../../../../README.md).
 
 | Pump | Layout cell | Stages | Size (µm) | Origin in `chip_top` (µm) | Output pad |
 |---|---|---|---|---|---|
@@ -36,7 +36,7 @@ with a 4.72 µm perimeter. These values, and the stage counts, come from the
 extracted netlists in [`docs/netlists/`](../../../../docs/netlists).
 
 Each pump has its own clock generator, placed next to it in `chip_top`. See the
-[clock generator README](../../../../1_Design/GF180_cells/NonOvCLKGen/README.md).
+[clock generator&nbsp;README](../../../../1_Design/GF180_cells/NonOvCLKGen/README.md).
 
 ### Bonding
 

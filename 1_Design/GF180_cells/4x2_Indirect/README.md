@@ -7,7 +7,7 @@ pFET is used to program the floating gate and a second pFET on the same
 floating gate is used by the circuit, so the circuit never has to be
 disconnected for programming.
 
-For an overview of the chip see the [top-level README](../../../README.md).
+For an overview of the chip see the [top-level&nbsp;README](../../../README.md).
 
 ## Floating-gate array
 

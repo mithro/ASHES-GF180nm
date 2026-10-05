@@ -5,7 +5,7 @@ Two cells with plain transistors: three NFETs in `3NFET` and three PFETs in
 with the PDK models and to extract device parameters for the lab's circuit
 design.
 
-For an overview of the chip see the [top-level README](../../../README.md).
+For an overview of the chip see the [top-level&nbsp;README](../../../README.md).
 
 | Structure | Layout cell | Size (µm) | Origin in `chip_top` (µm) |
 |---|---|---|---|

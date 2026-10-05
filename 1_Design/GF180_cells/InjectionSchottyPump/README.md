@@ -6,7 +6,7 @@ pump, a two-stage Dickson charge pump with Schottky diodes.
 The layout that is on the chip is
 [`2_Tools/lib/gds/FinalPumps/InjectionSchottkyPump.gds`](../../../2_Tools/lib/gds/FinalPumps/InjectionSchottkyPump.gds).
 Pads, measurement steps and expected results for all three pumps are in the
-[FinalPumps README](../../../2_Tools/lib/gds/FinalPumps/README.md).
+[FinalPumps&nbsp;README](../../../2_Tools/lib/gds/FinalPumps/README.md).
 
 ## Injection charge pump
 

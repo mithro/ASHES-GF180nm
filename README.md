@@ -43,8 +43,8 @@ designers:
 
 | Structure | Finding | Details |
 |---|---|---|
-| Transconductance amplifiers | `VINJ` does not reach a pad, and pad 24 is unconnected. | [OTA README](1_Design/GF180_cells/2TA/README.md#known-layout-issue) |
-| Winner-take-all cell | The shared node `Vmid` does not connect to the four channels. | [WTA README](2_Tools/lib/gds/README.md#known-layout-issue) |
+| Transconductance amplifiers | `VINJ` does not reach a pad, and pad 24 is unconnected. | [OTA&nbsp;README](1_Design/GF180_cells/2TA/README.md#known-layout-issue) |
+| Winner-take-all cell | The shared node `Vmid` does not connect to the four channels. | [WTA&nbsp;README](2_Tools/lib/gds/README.md#known-layout-issue) |
 
 ## The chip
 
@@ -127,7 +127,7 @@ non-overlapping clock generator.
 
 ![Simulated start-up of the three pumps at VDD = 5 V and 10 MHz](docs/img/sim_pump_startup.png)
 
-Full details: [FinalPumps README](2_Tools/lib/gds/FinalPumps/README.md),
+Full details: [FinalPumps&nbsp;README](2_Tools/lib/gds/FinalPumps/README.md),
 [injection pump design files](1_Design/GF180_cells/InjectionSchottyPump/README.md),
 [clock generator](1_Design/GF180_cells/NonOvCLKGen/README.md).
 
@@ -156,7 +156,7 @@ programmed while the run pFET stays connected to its circuit.
 | Test | Read each cell by sweeping its gate line and measuring the run pFET current, then tunnel and inject and read again. |
 | Expected | Not recorded yet. Programming voltages and rates for this process are what the chip is meant to measure. |
 
-Full details: [floating-gate array README](1_Design/GF180_cells/4x2_Indirect/README.md).
+Full details: [floating-gate array&nbsp;README](1_Design/GF180_cells/4x2_Indirect/README.md).
 
 Reading: D. W. Graham, E. Farquhar, B. Degnan, C. Gordon, P. Hasler, "Indirect
 Programming of Floating-Gate Transistors," IEEE TCAS-I, 2007,
@@ -179,7 +179,7 @@ programming. A `PROG` pad switches between programming and normal operation.
 | Expected | Not recorded yet. |
 | Known issue | `VINJ` does not reach a pad in the layout. |
 
-Full details: [OTA README](1_Design/GF180_cells/2TA/README.md).
+Full details: [OTA&nbsp;README](1_Design/GF180_cells/2TA/README.md).
 
 Reading: R. Chawla, F. Adil, G. Serrano, P. E. Hasler, "Programmable Gm-C
 Filters Using Floating-Gate Operational Transconductance Amplifiers," IEEE
@@ -206,7 +206,7 @@ floating-gate voltage.
 | Test | Sweep the gate capacitor for the pFET curve, read the floating-gate voltage through the amplifier, and record how both move with tunneling and injection pulses. |
 | Expected | Not recorded yet. These measurements are the purpose of the cell. |
 
-Full details: [FG characterization README](1_Design/GF180_cells/FGCharacterization/README.md).
+Full details: [FG characterization&nbsp;README](1_Design/GF180_cells/FGCharacterization/README.md).
 
 Reading: P. Hasler, A. Basu, S. Koziol, "Above Threshold pFET Injection Modeling
 intended for Programming Floating-Gate Systems," ISCAS 2007,
@@ -228,7 +228,7 @@ widths of 0.5 µm, 5 µm and 50 µm.
 
 ![Simulated drain current against gate voltage on a log scale for the three NFETs and three PFETs](docs/img/sim_fets.png)
 
-Full details: [FET characterization README](1_Design/GF180_cells/Ike/README.md).
+Full details: [FET characterization&nbsp;README](1_Design/GF180_cells/Ike/README.md).
 
 Reading: C. C. Enz, F. Krummenacher, E. A. Vittoz, "An analytical MOS transistor
 model valid in all regions of operation and dedicated to low-voltage and
@@ -250,7 +250,7 @@ largest input current should take the whole bias current.
 | Expected | Not recorded yet. |
 | Known issue | The shared node does not connect to the four channels in the layout, so the cell is not expected to work as drawn. |
 
-Full details: [WTA README](2_Tools/lib/gds/README.md#winner-take-all-cell).
+Full details: [WTA&nbsp;README](2_Tools/lib/gds/README.md#winner-take-all-cell).
 
 Reading: S. Ramakrishnan, J. Hasler, "Vector-Matrix Multiply and
 Winner-Take-All as an Analog Classifier," IEEE TVLSI, 2014,

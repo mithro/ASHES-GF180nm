@@ -30,7 +30,7 @@ with the GF180MCU KLayout LVS deck. It has not been checked against silicon.
 | Shared pads | The WTA inputs share pads 11, 12, 17 and 18 with the OTA inputs. The OTA shares pads 27 and 30 with the FG char cell, and pads 51 to 54 with the FG array. |
 | Pump clocks | Each pump clock pad drives an `inv_1` and an `inv_4` standard cell in series, then the `CLK_IN` of that pump's clock generator. |
 | OTA `RUN` | Driven from pad 38 (`PROG`) through an `inv_4` cell, so `RUN` is the inverse of `PROG`. |
-| OTA `VINJ` | Not connected to any pad. See the [OTA README](../1_Design/GF180_cells/2TA/README.md#known-layout-issue). |
+| OTA `VINJ` | Not connected to any pad. See the [OTA&nbsp;README](../1_Design/GF180_cells/2TA/README.md#known-layout-issue). |
 | Pad 24 | Not connected to any test structure. |
 | Internal nodes | The injection pump `Stage1_out` and `Stage2_out` nodes and the WTA `Vmid` node do not reach a pad. |
 

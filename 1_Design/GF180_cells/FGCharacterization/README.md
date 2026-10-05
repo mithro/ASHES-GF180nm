@@ -6,7 +6,7 @@ there to measure how injection, tunneling and capacitive coupling behave in
 GF180MCU, which the floating-gate cells on this chip and in the
 [ASHES](https://github.com/GTIceLab/ashes) library depend on.
 
-For an overview of the chip see the [top-level README](../../../README.md).
+For an overview of the chip see the [top-level&nbsp;README](../../../README.md).
 
 ## Floating-gate characterization cell
 
