@@ -74,7 +74,10 @@ for title, pads in SIDES:
             conn = "Not connected"
         elif conn.startswith("VTUN"):
             conn = "`VTUN` of the FG array, the OTA and the FG char cell"
-        elif conn != "Core VDD" and "pump" not in conn:
+        elif conn == "Core VDD" or "pump" in conn:
+            for name in ("Vout_e", "Vin_w", "VDD"):
+                conn = conn.replace(name, "`%s`" % name)
+        else:
             items = []
             for item in conn.split(", "):
                 words = item.split(" ")
