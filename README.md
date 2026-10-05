@@ -79,6 +79,27 @@ non-overlapping clock generator (47.1 µm × 8.7 µm) built from
   </tr>
 </table>
 
+### Schematics
+
+Three of the cells on the chip have a drawn xschem schematic in this
+repository. `NonOvCLKGen.sch` holds its circuit as a SPICE netlist, and the
+other cells have layout only.
+
+![Injection charge pump schematic: three Schottky diodes in series from Vin_w to Vout_e, with pump capacitors on PHI1_w and PHI2_w and an output capacitor to GND_w](docs/img/sch_injection_pump.svg)
+
+*1. Injection charge pump, from
+[`InjectionSchottkyPump.sch`](1_Design/GF180_cells/InjectionSchottyPump/InjectionSchottkyPump.sch).*
+
+![Schematic of the two transconductance amplifiers and their floating-gate programming circuits](docs/img/sch_ota.svg)
+
+*5. OTA, from
+[`gf180_2TA_1FG_Strong.sch`](1_Design/GF180_cells/2TA/gf180_2TA_1FG_Strong.sch).*
+
+![Floating-gate characterization cell schematic](docs/img/sch_fg_characterization.svg)
+
+*6. FG char, from
+[`gf180_FG_Characterization.sch`](1_Design/GF180_cells/FGCharacterization/gf180_FG_Characterization.sch).*
+
 ### Cell ports
 
 Port names are copied from the text labels in each layout cell, including
