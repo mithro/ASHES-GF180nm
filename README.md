@@ -3,7 +3,7 @@
 Design files for the
 [Integrated Computational Electronics (ICE) Lab](https://github.com/GTIceLab)
 test chip on the [wafer.space](https://wafer.space/) GF180MCU Run 2 shuttle, and
-the analog and floating-gate standard cells it is built from. The chip is
+the open-source analog and floating-gate standard cells it is built from. The chip is
 project `0000`, "ICELab Test Chip", in the
 [wafer-space/ws-run2](https://github.com/wafer-space/ws-run2) project list.
 
@@ -326,4 +326,5 @@ run them:
 
 ## License
 
-This repository does not yet include a license file.
+This repository is licensed under the Apache License, Version 2.0. See
+[`LICENSE`](LICENSE).
