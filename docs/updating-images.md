@@ -1,6 +1,6 @@
 # Updating the reference images
 
-How to regenerate the pictures, pad map, netlists and simulation plots used in
+How to regenerate the pictures, diagrams, pad map, netlists and simulation plots used in
 the READMEs after the layout or a schematic changes. Run every command from the
 repository root.
 
@@ -12,6 +12,7 @@ repository root.
 | [`netlists/`](netlists) | [`scripts/extract_netlists.py`](scripts/extract_netlists.py) | Cell and chip GDS files |
 | [`img/pad_map.png`](img/pad_map.png) and the tables in [`pad-map.md`](pad-map.md) | [`scripts/port_map.py`](scripts/port_map.py), [`scripts/pad_map.py`](scripts/pad_map.py) | Extracted chip netlist |
 | [`img/sch_injection_pump.svg`](img/sch_injection_pump.svg), [`img/sch_ota.svg`](img/sch_ota.svg), [`img/sch_fg_characterization.svg`](img/sch_fg_characterization.svg) | [`scripts/export_schematics.sh`](scripts/export_schematics.sh), [`scripts/crop_svg.py`](scripts/crop_svg.py) | xschem `.sch` files |
+| [`img/dia_dickson.svg`](img/dia_dickson.svg), [`img/dia_clkgen.svg`](img/dia_clkgen.svg), [`img/dia_fg_cell.svg`](img/dia_fg_cell.svg), [`img/dia_wta.svg`](img/dia_wta.svg) | [`scripts/draw_schematics.py`](scripts/draw_schematics.py) | Circuits written out in the script, following the extracted netlists |
 | [`img/sim_pump_startup.png`](img/sim_pump_startup.png), [`img/sim_clkgen.png`](img/sim_clkgen.png), [`img/sim_fets.png`](img/sim_fets.png) | [`sim/run_sims.py`](sim/run_sims.py), [`scripts/plot_sims.py`](scripts/plot_sims.py) | Testbenches in [`sim/`](sim) |
 
 Intermediate files go to `docs/scripts/build/`, which git ignores.
@@ -102,6 +103,19 @@ To add a schematic, add it to the loop in
 [`scripts/export_schematics.sh`](scripts/export_schematics.sh) and to `NAMES`
 in [`scripts/crop_svg.py`](scripts/crop_svg.py).
 
+## Circuit diagrams
+
+The cells without an xschem schematic have diagrams drawn with
+[schemdraw](https://schemdraw.readthedocs.io/):
+
+```sh
+uv run docs/scripts/draw_schematics.py
+```
+
+Each diagram is a function in
+[`scripts/draw_schematics.py`](scripts/draw_schematics.py). If a netlist
+changes, the corresponding function must be edited by hand.
+
 ## Simulation plots
 
 ```sh
@@ -113,3 +127,12 @@ The tables in [`sim/README.md`](sim/README.md) are copied by hand from
 [`sim/results/pumps.csv`](sim/results/pumps.csv),
 [`sim/results/clkgen.json`](sim/results/clkgen.json) and the last row of each
 `fets_*.txt` file.
+
+## Checking the documents
+
+After any edit, check the links, image paths, anchors and heading levels of
+every Markdown file:
+
+```sh
+uv run docs/scripts/check_docs.py
+```

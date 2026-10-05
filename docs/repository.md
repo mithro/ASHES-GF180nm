@@ -41,7 +41,7 @@ repository does not record which one was submitted.
    ```
 
 The test structures are small compared with the die. The index in the
-[top-level&nbsp;README](../README.md#index) gives the origin of each one.
+[top-level&nbsp;README](../README.md#test-structures) gives the origin of each one.
 
 ## Cells that are not on this chip
 
@@ -73,8 +73,8 @@ The test structures are small compared with the die. The index in the
 | Chip assembly, metal fill and precheck | Not recorded in this repository | GDS under [`1_Design/Tapeouts/`](../1_Design/Tapeouts) |
 
 These files contain absolute paths from the original author's machine
-(`/home/luha/...`). Change them to your own PDK and checkout paths before you
-run them:
+(`/home/luha/...`), which must be changed to local PDK and checkout paths
+before the files are used:
 
 - [`InjectionSchottkyPump.spice`](../1_Design/GF180_cells/InjectionSchottyPump/InjectionSchottkyPump.spice)
 - [`NonOvCLKGen.spice`](../1_Design/GF180_cells/NonOvCLKGen/NonOvCLKGen.spice)

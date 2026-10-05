@@ -18,19 +18,19 @@ The map comes from a netlist extracted from
 [`chip_top_prefill.gds`](../1_Design/Tapeouts/WaferSpaceShuttleRun2/TrueFinalGds/chip_top_prefill.gds)
 with the GF180MCU KLayout LVS deck. It has not been checked against silicon.
 
-## Things to know before probing or bonding
+## Electrical constraints
 
 | Topic | Detail |
 |---|---|
 | Ground | Every cell `GND` port is on one net, a ring along the inside edge of the pad ring. The extraction names this net `VSS` after the `dvss` pad labels (pads 5, 19, 25, 35, 42, 56, 62 and 72). |
 | Core supply | Pad 63 (`analog_PAD[0]`) carries `VDD` for the clock generators, the clock buffers, the OTA, the FG char cell and the PFET cell. The `dvdd` pads do not feed the core. |
 | Pad ring supply | The `dvdd` pads (6, 20, 26, 36, 41, 55, 61, 71) supply the pad ring only. |
-| Pad voltage limits | Each analog pad cell contains four `diode_pd2nw_06v0` diodes and NMOS capacitors. If the diodes sit between the pad and the pad ring supply, as is usual for ESD protection, a pad driven above the pad ring supply will be clamped. This applies to the injection and tunneling pump outputs on pads 70 and 64. |
+| Pad voltage limits | In the PDK netlist of `gf180mcu_fd_io__asig_5p0`, a `diode_pd2nw_06v0` connects the pad (anode) to `DVDD` (cathode) and a `diode_nd2ps_06v0` connects `DVSS` to the pad. An analog pad therefore clamps at the pad ring supply plus a diode drop, and at a diode drop below ground. This limits the injection and tunneling pump outputs (pads 70 and 64) and the `VINJ` pads (23 and 49). The bare pads have no such diodes. |
 | Bare pads | Pad 46 carries `VTUN` for the FG array, the OTA and the FG char cell. Pad 67 carries the HV pump output. |
 | Shared pads | The WTA inputs share pads 11, 12, 17 and 18 with the OTA inputs. The OTA shares pads 27 and 30 with the FG char cell, and pads 51 to 54 with the FG array. |
 | Pump clocks | Each pump clock pad drives an `inv_1` and an `inv_4` standard cell in series, then the `CLK_IN` of that pump's clock generator. |
 | OTA `RUN` | Driven from pad 38 (`PROG`) through an `inv_4` cell, so `RUN` is the inverse of `PROG`. |
-| OTA `VINJ` | Not connected to any pad. See the [OTA&nbsp;README](../1_Design/GF180_cells/2TA/README.md#known-layout-issue). |
+| OTA `VINJ` | Not connected to any pad. See the [OTA&nbsp;README](../1_Design/GF180_cells/2TA/README.md#known-layout-issues). |
 | Pad 24 | Not connected to any test structure. |
 | Internal nodes | The injection pump `Stage1_out` and `Stage2_out` nodes and the WTA `Vmid` node do not reach a pad. |
 
@@ -115,13 +115,13 @@ with the GF180MCU KLayout LVS deck. It has not been checked against silicon.
 |---|---|---|---|
 | 61 | `VDD` | Supply | Pad ring supply only |
 | 62 | `VSS` | Ground | Ground: `GND` of every cell |
-| 63 | `analog_PAD[0]` | Analog | Core VDD |
-| 64 | `analog_PAD[1]` | Analog | Tunneling pump Vout_e |
+| 63 | `analog_PAD[0]` | Analog | Core `VDD` |
+| 64 | `analog_PAD[1]` | Analog | Tunneling pump `Vout_e` |
 | 65 | `analog_PAD[2]` | Analog | Tunneling pump clock |
 | 66 | `analog_PAD[3]` | Analog | HV pump clock |
-| 67 | `input_PAD[0]` | Bare | HV pump Vout_e |
-| 68 | `input_PAD[1]` | Analog | Vin_w of all three pumps |
+| 67 | `input_PAD[0]` | Bare | HV pump `Vout_e` |
+| 68 | `input_PAD[1]` | Analog | `Vin_w` of all three pumps |
 | 69 | `input_PAD[2]` | Analog | Injection pump clock |
-| 70 | `input_PAD[3]` | Analog | Injection pump Vout_e |
+| 70 | `input_PAD[3]` | Analog | Injection pump `Vout_e` |
 | 71 | `VDD` | Supply | Pad ring supply only |
 | 72 | `VSS` | Ground | Ground: `GND` of every cell |
