@@ -1,99 +1,109 @@
 # Floating-gate characterization cell
 
-`gf180_FG_Characterization` is a single floating-gate pFET with every terminal
-brought out, plus a small amplifier that reads the floating-gate voltage. It is
-there to measure how injection, tunneling and capacitive coupling behave in
-GF180MCU, which the floating-gate cells on this chip and in the
-[ASHES](https://github.com/GTIceLab/ashes) library depend on.
+`gf180_FG_Characterization`, the floating-gate (FG) characterization cell, is a
+single floating-gate pFET with every terminal on a separate pad, together with
+a differential amplifier that senses the floating-gate voltage. It measures
+hot-electron injection, Fowler-Nordheim tunneling and capacitive coupling in
+GF180MCU, the three mechanisms on which the other floating-gate cells on this
+chip rely. The chip is described in the [top-level&nbsp;README](../../../README.md).
 
-For an overview of the chip see the [top-level&nbsp;README](../../../README.md).
-
-## Floating-gate characterization cell
+## Overview
 
 | Item | Value |
 |---|---|
 | Layout cell | `gf180_FG_Characterization` |
-| Size (µm) | 11.3&nbsp;×&nbsp;33.9 as placed |
+| Size (µm) | 11.3&nbsp;×&nbsp;33.9 as placed (the cell is rotated by 270° in `chip_top`) |
 | Origin in `chip_top` (µm) | 3316,&nbsp;635 |
 | Devices | 8 `pfet_06v0`, 5 `nfet_06v0` |
 
-![Floating-gate characterization cell layout](../../../docs/img/fg_characterization.png)
+<img src="../../../docs/img/fg_characterization.png" alt="Floating-gate characterization cell layout" width="35%"/>
 
-![Floating-gate characterization cell schematic](../../../docs/img/sch_fg_characterization.svg)
+*Figure 1. Layout of the cell as placed in `chip_top`.*
 
-### Files
+## Files
 
 | File | Contents |
 |---|---|
-| [`gf180_FG_Characterization.sch`](gf180_FG_Characterization.sch) | xschem schematic. |
+| [`gf180_FG_Characterization.sch`](gf180_FG_Characterization.sch) | [xschem](https://xschem.sourceforge.io/) schematic. |
 | [`gf180_FG_Characterization_magic.gds`](gf180_FG_Characterization_magic.gds) | Layout. Matches the cell placed in `chip_top`. |
-| [`gf180_FG_Characterization_magic.lyrdb`](gf180_FG_Characterization_magic.lyrdb) | KLayout DRC report. |
+| [`gf180_FG_Characterization_magic.lyrdb`](gf180_FG_Characterization_magic.lyrdb) | [KLayout](https://www.klayout.de/) DRC report. |
 
-### Circuit
+## Circuit
 
-Sizes come from layout extraction of the chip. The schematic names are in
-brackets.
+![Floating-gate characterization cell schematic](../../../docs/img/sch_fg_characterization.svg)
+
+*Figure 2. Schematic, from
+[`gf180_FG_Characterization.sch`](gf180_FG_Characterization.sch). The supply
+port is named `Vdd` in the schematic and `VDD` in the layout.*
+
+Device sizes are taken from the netlist extracted from `chip_top`. Schematic
+instance names are given in brackets.
 
 | Device | W / L (µm) | Connection |
 |---|---|---|
 | Floating-gate pFET (`XM1`) | 2 / 1 | Gate on the floating gate, source `Vs`, drain `Vd`, n-well `VINJ`. |
-| Tunneling capacitor (`XM2`) | 0.45 / 0.55 | pFET capacitor between `VTUN` and the floating gate. |
-| Gate capacitor (`XM3`) | 7.35 / 1.65 | pFET capacitor between `Vgate` and the floating gate. |
-| Large capacitor (`XM4`) | 21.7 / 2.45 | pFET capacitor between `Vlarge` and the floating gate. |
-| Readout amplifier | 2 / 1 each | nFET differential pair with the floating gate on one input and `V2` on the other, tail current set by `Vref`, pFET mirror loads, output `Vout`. |
+| Tunneling capacitor (`XM2`) | 0.45 / 0.55 | pFET connected as a capacitor between `VTUN` and the floating gate. |
+| Gate capacitor (`XM3`) | 7.35 / 1.65 | pFET connected as a capacitor between `Vgate` and the floating gate. |
+| Large capacitor (`XM4`) | 21.7 / 2.45 | pFET connected as a capacitor between `Vlarge` and the floating gate. |
+| Sense amplifier (`XM5` to `XM13`) | 2 / 1 each | nFET differential pair with the floating gate on one input and `V2` on the other, tail current set by `Vref`, pFET current-mirror loads, output `Vout`. |
 
 By gate area, the large capacitor is 4.4 times the gate capacitor and about 215
 times the tunneling capacitor.
 
-`Vpoly` is a port in the layout but connects to no device in the extracted
-netlist. In the schematic it is marked as not connected.
+- `VINJ` is the n-well of the floating-gate pFET and of the pFETs of the
+  amplifier. The `VINJ` and `VTUN` labels in the layout are on the n-well layer.
+- `Vpoly` is a port in the layout but connects to no device in the extracted
+  netlist. The schematic marks it as not connected.
 
-### Bonding
+## Pad assignment
 
 | Port | Pad | Label in GDS | Shared with |
 |---|---|---|---|
-| `Vout` | 22 | `bidir_PAD[15]` | |
-| `VINJ` | 23 | `bidir_PAD[16]` | |
-| `Vpoly` | 27 | `bidir_PAD[18]` | OTA `Vg[0]` |
-| `Vd` | 28 | `bidir_PAD[19]` | |
-| `Vs` | 29 | `bidir_PAD[20]` | |
-| `Vgate` | 30 | `bidir_PAD[21]` | OTA `Vg[1]` |
-| `Vref` | 31 | `bidir_PAD[22]` | |
-| `Vlarge` | 32 | `bidir_PAD[23]` | |
-| `V2` | 33 | `bidir_PAD[24]` | |
-| `VTUN` | 46 (bare) | `bidir_PAD[33]` | FG array `VTUN`, OTA `VTUN` |
-| `VDD` | 63 | `analog_PAD[0]` | Core supply |
-| `GND` | 5, 19, 25, 35, 42, 56, 62, 72 | `VSS` | Every cell |
+| `Vout` | [22](../../../docs/pad-map.md#bottom-side-left-to-right) | `bidir_PAD[15]` | |
+| `VINJ` | [23](../../../docs/pad-map.md#bottom-side-left-to-right) | `bidir_PAD[16]` | |
+| `Vpoly` | [27](../../../docs/pad-map.md#right-side-bottom-to-top) | `bidir_PAD[18]` | [OTA](../2TA/README.md#pad-assignment) `Vg[0]` |
+| `Vd` | [28](../../../docs/pad-map.md#right-side-bottom-to-top) | `bidir_PAD[19]` | |
+| `Vs` | [29](../../../docs/pad-map.md#right-side-bottom-to-top) | `bidir_PAD[20]` | |
+| `Vgate` | [30](../../../docs/pad-map.md#right-side-bottom-to-top) | `bidir_PAD[21]` | [OTA](../2TA/README.md#pad-assignment) `Vg[1]` |
+| `Vref` | [31](../../../docs/pad-map.md#right-side-bottom-to-top) | `bidir_PAD[22]` | |
+| `Vlarge` | [32](../../../docs/pad-map.md#right-side-bottom-to-top) | `bidir_PAD[23]` | |
+| `V2` | [33](../../../docs/pad-map.md#right-side-bottom-to-top) | `bidir_PAD[24]` | |
+| `VTUN` | [46](../../../docs/pad-map.md#top-side-right-to-left) (bare) | `bidir_PAD[33]` | [FG array](../4x2_Indirect/README.md#pad-assignment) `VTUN`, [OTA](../2TA/README.md#pad-assignment) `VTUN` |
+| `VDD` | [63](../../../docs/pad-map.md#left-side-top-to-bottom) | `analog_PAD[0]` | Core supply |
+| `GND` | [5](../../../docs/pad-map.md#bottom-side-left-to-right), [19](../../../docs/pad-map.md#bottom-side-left-to-right), [25](../../../docs/pad-map.md#right-side-bottom-to-top), [35](../../../docs/pad-map.md#right-side-bottom-to-top), [42](../../../docs/pad-map.md#top-side-right-to-left), [56](../../../docs/pad-map.md#top-side-right-to-left), [62](../../../docs/pad-map.md#left-side-top-to-bottom), [72](../../../docs/pad-map.md#left-side-top-to-bottom) | `VSS` | Every cell |
 
-The `VINJ` and `VTUN` labels in this cell are on the n-well layer. `VINJ` is
-the n-well of the floating-gate pFET and of the amplifier's pFETs.
+`VINJ` is on an analog pad, which clamps at the pad ring supply plus a diode
+drop ([electrical constraints](../../../docs/pad-map.md#electrical-constraints)).
 
-### How to test
+## Measurement procedure
 
 | Measurement | Method |
 |---|---|
 | Gate sweep | Bias `Vs` and `Vd`, sweep `Vgate` and record the pFET current. Repeat with `Vlarge` to compare the two coupling capacitors. |
-| Floating-gate voltage | Bias the amplifier with `Vref`, sweep `V2` and find where `Vout` switches. That value of `V2` tracks the floating-gate voltage. |
+| Floating-gate voltage | Bias the amplifier with `Vref`, sweep `V2` and record the value at which `Vout` switches. The comparison is open loop, so that value equals the floating-gate voltage plus the input offset of the differential pair. |
 | Coupling ratio | Step `Vgate` or `Vlarge` and record the change in floating-gate voltage from the amplifier. |
-| Tunneling | Pulse `VTUN` high and record the shift in the gate sweep against pulse voltage and length. |
-| Injection | Raise `Vs` and `VINJ` above `Vd` so the pFET has a large source-to-drain voltage, and record the shift in the gate sweep against that voltage, the channel current and time. |
+| Tunneling | Apply pulses to `VTUN` and record the shift of the gate sweep against pulse voltage and duration. |
+| Injection | Raise `Vs` and `VINJ` above `Vd`, so that the pFET has a large source-to-drain voltage, and record the shift of the gate sweep against that voltage, the channel current and time. |
 
-Things to check first:
+`VTUN` is common to this cell, the FG array and the OTA, so a tunneling pulse
+changes the floating gates of all three structures.
 
-- `VTUN` is shared with the FG array and the OTA, so tunneling here changes
-  their floating gates too.
-- `Vgate` and `Vpoly` share pads with the OTA gate lines.
-- `VINJ` is on a standard analog pad, which may clamp near the pad ring supply.
-  See [`docs/pad-map.md`](../../../docs/pad-map.md#things-to-know-before-probing-or-bonding).
+## Expected results
 
-### Expected results
+No expected values are recorded. The repository gives no expected injection or
+tunneling rates for this process.
 
-There is no testbench for this cell, and the repository records no expected
-injection or tunneling rates. These measurements are what the cell is meant to
-supply.
+## Simulation
+
+There is no testbench for this cell. The floating-gate node in the schematic
+has no DC path, so a simulation requires an assumed floating-gate voltage.
 
 ## References
 
-See [`docs/references.md`](../../../docs/references.md#floating-gate-characterization).
-Start with Hasler, Basu and Koziol (2007) for pFET injection and Lenzlinger and
-Snow (1969) for tunneling.
+- P. Hasler, A. Basu, S. Koziol, "Above Threshold pFET Injection Modeling
+  intended for Programming Floating-Gate Systems," IEEE ISCAS 2007.
+  [doi:10.1109/ISCAS.2007.378709](https://doi.org/10.1109/ISCAS.2007.378709)
+- M. Lenzlinger, E. H. Snow, "Fowler-Nordheim Tunneling into Thermally Grown
+  SiO2," Journal of Applied Physics, 1969.
+  [doi:10.1063/1.1657043](https://doi.org/10.1063/1.1657043)
+- [Full list](../../../docs/references.md#floating-gate-characterization)
